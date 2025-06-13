@@ -3,248 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스텝업 마케팅 | 당신의 비즈니스를 한 단계 위로!</title>
+    <title>네이버 플레이스 마케팅 전문가 | [임수현 총괄 팀장] | 당신의 매장을 빛낼 유일한 기회!</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for a modern look -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f8f8;
+            background-color: #f8f8f8; /* Soft background */
             color: #333;
         }
-        .section-padding {
-            padding: 4rem 0;
+        .section-container {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        @media (min-width: 768px) {
-            .section-padding {
-                padding: 6rem 0;
-            }
+        /* Custom styles for accordion (FAQ) */
+        .accordion-item {
+            border-bottom: 1px solid #e0e0e0;
         }
-        /* Simple Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+        .accordion-header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            max-width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.show .modal-content {
-            transform: translateY(0);
-        }
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #666;
+            padding: 1.25rem 0;
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: background-color 0.2s;
+            font-weight: 600;
+            color: #333;
         }
-        .modal-close:hover {
-            background-color: #eee;
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 0.5rem;
+            color: #555;
         }
+        .accordion-content.active {
+            max-height: 200px; /* Adjust as needed */
+            padding-bottom: 1.25rem;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease-out;
+        }
+        .accordion-icon.rotate {
+            transform: rotate(180deg);
+        }
+
+        /* Spinner for loading state */
         .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #6366f1; /* Indigo-500 */
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff;
             border-radius: 50%;
             width: 24px;
             height: 24px;
             animation: spin 1s linear infinite;
         }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Section padding for LLM feature */
+        .section-padding {
+            padding: 4rem 1.5rem; /* Equivalent to py-16 px-6 */
+        }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
 
-    <!-- Header Section -->
-    <header class="bg-white shadow-sm py-4 fixed top-0 w-full z-10">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-indigo-600">스텝업 마케팅</a>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium">회사 소개</a></li>
-                    <li><a href="#services" class="text-gray-700 hover:text-indigo-600 font-medium">서비스</a></li>
-                    <li><a href="#portfolio" class="text-gray-700 hover:text-indigo-600 font-medium">포트폴리오</a></li>
-                    <li><a href="#llm-feature" class="text-gray-700 hover:text-indigo-600 font-medium">✨ AI 제안</a></li>
-                    <li><a href="#why-us" class="text-gray-700 hover:text-indigo-600 font-medium">왜 우리인가?</a></li>
-                    <li><a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium">문의</a></li>
-                </ul>
+    <!-- Header / Navigation Bar -->
+    <header class="bg-white shadow-sm py-4">
+        <div class="max-w-7xl mx-auto px-10 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600">
+                스텝업 마케팅
+            </a>
+            <nav class="hidden md:flex space-x-6 text-gray-600 font-medium">
+                <a href="#services" class="hover:text-blue-600">서비스</a>
+                <a href="#why-me" class="hover:text-blue-600">왜 저인가요?</a>
+                <a href="#success" class="hover:text-blue-600">성공사례</a>
+                <a href="#process" class="hover:text-blue-600">진행 과정</a>
+                <a href="#faq" class="hover:text-blue-600">FAQ</a>
+                <a href="#contact" class="hover:text-blue-600">문의</a>
             </nav>
+            <a href="#contact" class="md:hidden bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">문의</a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white text-center py-20 md:py-28 lg:py-36 mt-16 rounded-b-xl shadow-lg">
-        <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-                당신의 비즈니스를 <br> <br class="md:hidden">한 단계 <span class="text-yellow-300">스텝업</span> 시키세요!
+    <section class="relative bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-20 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image:"></div>
+        <div class="relative z-10 section-container text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-down">
+                당신의 가게는 분명 매력 있어요.<br class="md:hidden"><br> <span class="text-yellow-300">다만 아직 세상이 몰랐을 뿐입니다. </span>
             </h1>
-            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto opacity-90">
-                스텝업 마케팅은 혁신적인 전략과 실행력으로 <br> 당신의 브랜드 가치를 극대화합니다.
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto opacity-90 animate-fade-in">
+                프리랜서 전문가가 직접, 꼼꼼하게 관리하여 고객 방문을 극대화합니다.
             </p>
-            <a href="#contact" class="bg-white text-indigo-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transform transition-all duration-300 hover:scale-105">
-                지금 바로 상담하기
+            <a href="#contact" class="inline-block bg-white text-blue-600 font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300 animate-bounce-in">
+                지금 바로 무료 상담 신청하기
             </a>
         </div>
     </section>
 
-    <img src="001.png">
-
-    <!-- New Section: Our Success Story (Large Image) -->
-    <section id="success-story" class="section-padding bg-white rounded-xl shadow-md mx-4 md:mx-auto max-w-6xl my-12">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
-                우리의 <span class="text-indigo-600">성공 사례</span>
-            </h2>
-            <p class="text-gray-600 text-lg mb-8 max-w-3xl mx-auto">
-                스텝업 마케팅과 함께 성장한 비즈니스의 생생한 스토리를 만나보세요.
-            </p>
-            <div class="flex justify-center">
-                <!-- 여기에 큰 이미지를 넣어주세요! -->
-                <!-- 'src' 부분의 주소를 여러분의 이미지 파일 이름(예: success_story.jpg)으로 바꾸고, 이 이미지 파일을 index.html과 같은 폴더에 함께 업로드해야 해요. -->
-                <img src="001.png" alt="스텝업 마케팅 성공 사례 이미지" class="rounded-xl shadow-lg w-full max-w-full h-auto object-cover">
+    <!-- Problem & Empathy Section -->
+    <section class="bg-gray-50 section-container" id="problems">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+            혹시 이런 고민이 있으신가요?
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                <div class="text-blue-500 text-5xl mb-4">💡</div> <!-- Icon placeholder -->
+                <h3 class="text-xl font-semibold mb-3 text-gray-700">상위 노출, 어떻게 해야 할지 막막한가요?</h3>
+                <p class="text-gray-600">경쟁 매장들 사이에서 우리 가게만 묻히는 것 같아 고민이 많으시죠.</p>
             </div>
-            <p class="text-gray-500 text-sm mt-4">
-                이 이미지는 고객사의 실제 성공 사례를 시각적으로 표현합니다.
-            </p>
+            <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                <div class="text-green-500 text-5xl mb-4">💸</div> <!-- Icon placeholder -->
+                <h3 class="text-xl font-semibold mb-3 text-gray-700">마케팅 비용, 부담스럽지는 않으신가요?</h3>
+                <p class="text-gray-600">광고 대행사의 높은 수수료가 걱정되시나요?</p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                <div class="text-red-500 text-5xl mb-4">⏰</div> <!-- Icon placeholder -->
+                <h3 class="text-xl font-semibold mb-3 text-gray-700">매장 운영만으로도 시간이 부족한가요?</h3>
+                <p class="text-gray-600">플레이스 관리, 언제 해야 할지 막막하신가요?</p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                <div class="text-purple-500 text-5xl mb-4">🤔</div> <!-- Icon placeholder -->
+                <h3 class="text-xl font-semibold mb-3 text-gray-700">어떤 전략이 효과적인지 모르겠나요?</h3>
+                <p class="text-gray-600">단순한 관리로는 부족하다는 것을 알고 계시죠.</p>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section-padding bg-white rounded-xl shadow-md mx-4 md:mx-auto max-w-6xl my-12">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="md:w-1/2">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-tight">
-                    스텝업 마케팅은 <br>어떤 회사인가요?
-                </h2>
-                <p class="text-gray-600 text-lg mb-4">
-                    저희는 단순한 마케팅 대행사를 넘어, 고객사의 지속적인 성장을 위한 <strong class="text-indigo-600">파트너</strong>입니다.
-                    급변하는 시장 환경 속에서 최적의 마케팅 솔루션을 제공하며,
-                    데이터 기반의 전략 수립과 창의적인 콘텐츠로 고객사의 성공을 이끌어냅니다.
+    <!-- Solution & Service Introduction Section -->
+    <section class="bg-white section-container" id="services">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+            저희가 제공하는 <span class="text-blue-600">단 하나의 솔루션!</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="text-center p-8 bg-blue-50 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div class="text-blue-600 text-6xl mb-6">✨</div> <!-- Icon placeholder -->
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">네이버 플레이스 최적화 관리</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    매장 정보, 사진, 메뉴, 소식, 리뷰까지 빠짐없이 꼼꼼하게 관리하여 플레이스 완성도를 높입니다.
                 </p>
-                <p class="text-gray-600 text-lg">
-                    한 걸음 더 나아가기 위한 당신의 여정에 스텝업 마케팅이 함께합니다.
+            </div>
+            <div class="text-center p-8 bg-green-50 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div class="text-green-600 text-6xl mb-6">📈</div> <!-- Icon placeholder -->
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">상위 노출 전략 수립</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    정확한 키워드 분석과 경쟁사 분석을 통해 매장에 맞는 최적의 상위 노출 전략을 제시합니다.
                 </p>
             </div>
-            <div class="md:w-1/2 flex justify-center">
-                <!-- 기존의 회사 소개 이미지는 여기 있습니다. -->
-                <img src="https://placehold.co/600x400/D1C4E9/4527A0?text=회사+소개+사진" alt="스텝업 마케팅 회사 소개 이미지" class="rounded-xl shadow-lg w-full max-w-md md:max-w-none h-auto">
+            <div class="text-center p-8 bg-purple-50 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div class="text-purple-600 text-6xl mb-6">🤝</div> <!-- Icon placeholder -->
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">잠재 고객 발굴 및 유입</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    플레이스 저장, 알림 받기 유도, 리뷰 이벤트 기획 등으로 실제 방문 고객을 늘립니다.
+                </p>
+            </div>
+            <div class="text-center p-8 bg-yellow-50 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div class="text-yellow-600 text-6xl mb-6">📊</div> <!-- Icon placeholder -->
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">실시간 피드백 및 보고서 제공</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    투명한 성과 보고서와 실시간 피드백으로 궁금증을 해소하고 함께 성장합니다.
+                </p>
+            </div>
+            <div class="text-center p-8 bg-pink-50 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div class="text-pink-600 text-6xl mb-6">✍️</div> <!-- Icon placeholder -->
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">감성적인 소식 콘텐츠 제작</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    매장의 스토리를 담은 감성적인 소식과 쿠폰, 이벤트 콘텐츠로 고객의 마음을 사로잡습니다.
+                </p>
+            </div>
+            <div class="text-center p-8 bg-teal-50 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div class="text-teal-600 text-6xl mb-6">🚀</div> <!-- Icon placeholder -->
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">지속적인 최적화 및 개선</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    데이터 분석을 통해 지속적으로 개선점을 찾아내고 최적화하여 효과를 극대화합니다.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="section-padding bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">우리의 <span class="text-indigo-600">핵심 서비스</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service Card 1 -->
-                <div class="bg-white p-8 rounded-xl shadow-md text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <div class="text-5xl text-indigo-500 mb-6">📈</div> <!-- Icon for Digital Marketing -->
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">디지털 마케팅</h3>
-                    <p class="text-gray-600">검색 엔진 최적화(SEO), 소셜 미디어 마케팅, 온라인 광고 등 통합 디지털 전략을 제공합니다.</p>
+    <!-- Why Choose Me Section -->
+    <section class="bg-gray-100 section-container" id="why-me">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+            왜 저와 함께해야 할까요?
+        </h2>
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2 flex justify-center">
+                <img src="https://placehold.co/400x400/DDEEFF/333333?text=프리랜서+전문가" alt="프리랜서 전문가 이미지" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-xl border-4 border-blue-300">
+            </div>
+            <div class="lg:w-1/2 space-y-8">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 text-blue-600 text-4xl mr-4">✓</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">1:1 맞춤형 컨설팅</h3>
+                        <p class="text-gray-700">대행사처럼 찍어내듯 하지 않습니다. 사장님의 매장 특성과 목표에 맞춰 깊이 있는 분석과 맞춤 전략을 제시합니다.</p>
+                    </div>
                 </div>
-                <!-- Service Card 2 -->
-                <div class="bg-white p-8 rounded-xl shadow-md text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <div class="text-5xl text-purple-500 mb-6">💡</div> <!-- Icon for Branding -->
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">브랜드 컨설팅</h3>
-                    <p class="text-gray-600">강력한 브랜드 아이덴티티 구축부터 시장 포지셔닝까지, 브랜드 가치를 높이는 전략을 제시합니다.</p>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 text-blue-600 text-4xl mr-4">✓</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">합리적인 비용</h3>
+                        <p class="text-gray-700">불필요한 비용 거품을 뺐습니다. 오직 성과로 증명하며, 사장님의 부담을 덜어드립니다.</p>
+                    </div>
                 </div>
-                <!-- Service Card 3 -->
-                <div class="bg-white p-8 rounded-xl shadow-md text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <div class="text-5xl text-yellow-500 mb-6">✍️</div> <!-- Icon for Content Marketing -->
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">콘텐츠 마케팅</h3>
-                    <p class="text-gray-600">매력적인 스토리텔링과 고품질 콘텐츠로 고객과의 유대감을 강화합니다.</p>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 text-blue-600 text-4xl mr-4">✓</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">프리랜서의 책임감</h3>
+                        <p class="text-gray-700">제 이름과 명예를 걸고 직접 관리합니다. 사장님의 성공이 곧 저의 성공이라는 마음으로 최선을 다합니다.</p>
+                    </div>
                 </div>
-                <!-- Service Card 4 -->
-                <div class="bg-white p-8 rounded-xl shadow-md text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <div class="text-5xl text-green-500 mb-6">📊</div> <!-- Icon for Data Analysis -->
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">데이터 분석 & 리포팅</h3>
-                    <p class="text-gray-600">정확한 데이터 분석을 통해 마케팅 성과를 측정하고 최적화 방안을 제시합니다.</p>
-                </div>
-                <!-- Service Card 5 -->
-                <div class="bg-white p-8 rounded-xl shadow-md text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <div class="text-5xl text-red-500 mb-6">📱</div> <!-- Icon for Mobile Marketing -->
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">모바일 마케팅</h3>
-                    <p class="text-gray-600">모바일 환경에 최적화된 캠페인으로 더 많은 고객에게 다가갑니다.</p>
-                </div>
-                <!-- Service Card 6 -->
-                <div class="bg-white p-8 rounded-xl shadow-md text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <div class="text-5xl text-blue-500 mb-6">🗣️</div> <!-- Icon for Public Relations -->
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">PR & 미디어 전략</h3>
-                    <p class="text-gray-600">긍정적인 기업 이미지 구축과 미디어 관계를 통한 홍보 효과를 극대화합니다.</p>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 text-blue-600 text-4xl mr-4">✓</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">빠른 피드백 & 투명한 소통</h3>
+                        <p class="text-gray-700">실시간 소통 채널을 통해 궁금증을 빠르게 해결하고, 모든 진행 과정을 투명하게 보고드립니다.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- New Section: Portfolio (Grid of smaller images) -->
-    <section id="portfolio" class="section-padding bg-white rounded-xl shadow-md mx-4 md:mx-auto max-w-6xl my-12">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
-                우리의 <span class="text-indigo-600">포트폴리오</span>
-            </h2>
-            <p class="text-gray-600 text-lg mb-8 max-w-3xl mx-auto">
-                스텝업 마케팅의 다양한 프로젝트 결과물을 확인해 보세요.
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- 포트폴리오 이미지 1 -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-sm transform transition-all duration-300 hover:scale-105 hover:shadow-md">
-                    <!-- 'src'를 여러분의 이미지 파일 이름으로 바꿔주세요. -->
-                    <img src="https://placehold.co/400x300/B0BEC5/263238?text=포트폴리오+1" alt="포트폴리오 이미지 1" class="rounded-lg w-full h-48 object-cover mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">프로젝트 제목 1</h3>
-                    <p class="text-sm text-gray-600">간단한 프로젝트 설명입니다.</p>
+    <!-- Success Stories Section -->
+    <section class="bg-white section-container" id="success">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+            저와 함께 <span class="text-blue-600">성장한 사장님들의 이야기</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md border-t-4 border-blue-500">
+                <div class="flex items-center mb-4">
+                    <img src="https://placehold.co/80x80/E0E0E0/555555?text=매장+사진" alt="성공 매장 이미지 1" class="rounded-full w-20 h-20 object-cover mr-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">[매장명 1]</h3>
+                        <p class="text-gray-600">음식점 / 서울 강남구</p>
+                    </div>
                 </div>
-                <!-- 포트폴리오 이미지 2 -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-sm transform transition-all duration-300 hover:scale-105 hover:shadow-md">
-                    <img src="https://placehold.co/400x300/B0BEC5/263238?text=포트폴리오+2" alt="포트폴리오 이미지 2" class="rounded-lg w-full h-48 object-cover mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">프로젝트 제목 2</h3>
-                    <p class="text-sm text-gray-600">간단한 프로젝트 설명입니다.</p>
+                <blockquote class="text-gray-700 italic border-l-4 border-gray-300 pl-4">
+                    "처음엔 반신반의했는데, 이제 네이버 플레이스 덕분에 손님들이 알아서 찾아와요! 문의 전화가 두 배로 늘었고, 덕분에 매출도 엄청 뛰었습니다. 정말 감사합니다!"
+                </blockquote>
+                <p class="text-right text-gray-500 mt-4">- 김OO 사장님</p>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md border-t-4 border-green-500">
+                <div class="flex items-center mb-4">
+                    <img src="https://placehold.co/80x80/E0E0E0/555555?text=매장+사진" alt="성공 매장 이미지 2" class="rounded-full w-20 h-20 object-cover mr-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">[매장명 2]</h3>
+                        <p class="text-gray-600">카페 / 경기 성남시</p>
+                    </div>
                 </div>
-                <!-- 포트폴리오 이미지 3 -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-sm transform transition-all duration-300 hover:scale-105 hover:shadow-md">
-                    <img src="https://placehold.co/400x300/B0BEC5/263238?text=포트폴리오+3" alt="포트폴리오 이미지 3" class="rounded-lg w-full h-48 object-cover mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">프로젝트 제목 3</h3>
-                    <p class="text-sm text-gray-600">간단한 프로젝트 설명입니다.</p>
+                <blockquote class="text-gray-700 italic border-l-4 border-gray-300 pl-4">
+                    "플레이스 관리에 이렇게 신경 써야 하는 줄 몰랐어요. 전문가의 손길이 닿으니 확실히 다르네요. 상위 노출은 물론, 리뷰 수도 폭발적으로 늘어서 행복합니다!"
+                </blockquote>
+                <p class="text-right text-gray-500 mt-4">- 박OO 사장님</p>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <a href="#contact" class="inline-block bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:bg-blue-700 transform hover:scale-105 transition duration-300">
+                더 많은 성공 사례 보기 (준비 중)
+            </a>
+        </div>
+    </section>
+
+    <!-- Service Process Section -->
+    <section class="bg-gray-100 section-container" id="process">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+            간단하고 명확한 <span class="text-blue-600">진행 과정</span>
+        </h2>
+        <div class="relative flex flex-col items-center">
+            <!-- Line connector (for larger screens) -->
+            <div class="absolute hidden md:block h-full w-1 bg-gray-300 left-1/2 transform -translate-x-1/2 top-0 bottom-0"></div>
+
+            <!-- Step 1 -->
+            <div class="relative z-10 w-full md:w-3/4 lg:w-2/3 mb-8 md:mb-12 flex flex-col md:flex-row items-center md:items-start bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="hidden md:flex flex-shrink-0 w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-3xl font-bold mr-6">1</div>
+                <div class="md:hidden flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">1</div>
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">1단계: 무료 상담 신청 & 매장 분석</h3>
+                    <p class="text-gray-700">사장님의 매장 현황과 니즈를 파악하는 무료 상담을 진행합니다.</p>
                 </div>
-                <!-- 포트폴리오 이미지 4 -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-sm transform transition-all duration-300 hover:scale-105 hover:shadow-md">
-                    <img src="https://placehold.co/400x300/B0BEC5/263238?text=포트폴리오+4" alt="포트폴리오 이미지 4" class="rounded-lg w-full h-48 object-cover mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">프로젝트 제목 4</h3>
-                    <p class="text-sm text-gray-600">간단한 프로젝트 설명입니다.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative z-10 w-full md:w-3/4 lg:w-2/3 mb-8 md:mb-12 flex flex-col md:flex-row items-center md:items-start bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 md:ml-auto">
+                <div class="hidden md:flex flex-shrink-0 w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-3xl font-bold mr-6">2</div>
+                <div class="md:hidden flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">2</div>
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">2단계: 맞춤 전략 제안</h3>
+                    <p class="text-gray-700">분석을 바탕으로 사장님 매장에 최적화된 플레이스 마케팅 플랜을 수립하여 제안합니다.</p>
                 </div>
-                <!-- 필요하다면 위 포트폴리오 이미지 블록을 복사해서 더 추가할 수 있어요. -->
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative z-10 w-full md:w-3/4 lg:w-2/3 mb-8 md:mb-12 flex flex-col md:flex-row items-center md:items-start bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300">
+                <div class="hidden md:flex flex-shrink-0 w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-3xl font-bold mr-6">3</div>
+                <div class="md:hidden flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">3</div>
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">3단계: 실행 및 관리</h3>
+                    <p class="text-gray-700">제안된 전략에 따라 전문적인 플레이스 관리 및 최적화를 시작합니다.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative z-10 w-full md:w-3/4 lg:w-2/3 mb-8 md:mb-12 flex flex-col md:flex-row items-center md:items-start bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 md:ml-auto">
+                <div class="hidden md:flex flex-shrink-0 w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-3xl font-bold mr-6">4</div>
+                <div class="md:hidden flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">4</div>
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-800">4단계: 성과 보고 & 피드백</h3>
+                    <p class="text-gray-700">주기적인 리포트와 피드백을 통해 매장의 성장을 함께 확인합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="bg-white section-container" id="faq">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+            자주 묻는 질문
+        </h2>
+        <div class="max-w-3xl mx-auto">
+            <!-- FAQ Item 1 -->
+            <div class="accordion-item">
+                <div class="accordion-header" data-target="faq1">
+                    <span class="text-lg">Q. 비용은 얼마인가요?</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div id="faq1" class="accordion-content">
+                    <p>
+                        A. 매장의 종류, 규모, 목표에 따라 맞춤형으로 서비스가 제공되므로 비용은 상담 후 결정됩니다. 합리적인 선에서 최고의 효율을 약속드립니다.
+                    </p>
+                </div>
+            </div>
+            <!-- FAQ Item 2 -->
+            <div class="accordion-item">
+                <div class="accordion-header" data-target="faq2">
+                    <span class="text-lg">Q. 계약 기간은 어떻게 되나요?</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div id="faq2" class="accordion-content">
+                    <p>
+                        A. 최소 3개월 단위 계약을 기본으로 하고 있으며, 장기 계약 시 추가 할인 혜택을 제공합니다.
+                    </p>
+                </div>
+            </div>
+            <!-- FAQ Item 3 -->
+            <div class="accordion-item">
+                <div class="accordion-header" data-target="faq3">
+                    <span class="text-lg">Q. 어떤 매장들이 효과를 볼 수 있나요?</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div id="faq3" class="accordion-content">
+                    <p>
+                        A. 오프라인 매장을 운영하며 네이버 검색을 통한 고객 유입이 중요한 모든 업종 (음식점, 카페, 미용실, 학원, 병원 등)에 효과적입니다.
+                    </p>
+                </div>
+            </div>
+            <!-- FAQ Item 4 -->
+            <div class="accordion-item">
+                <div class="accordion-header" data-target="faq4">
+                    <span class="text-lg">Q. 플레이스 외 다른 마케팅도 가능한가요?</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div id="faq4" class="accordion-content">
+                    <p>
+                        A. 현재는 네이버 플레이스 마케팅에 집중하고 있습니다. 다만, 상담 시 필요하다고 판단될 경우 연계 가능한 다른 마케팅 솔루션을 추천해 드릴 수 있습니다.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -270,207 +400,208 @@
                     <span id="buttonText">✨ AI 서비스 제안 받기</span>
                     <div id="loadingSpinner" class="spinner ml-3 hidden"></div>
                 </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us Section (Process Focused) -->
-    <section id="why-us" class="section-padding bg-white rounded-xl shadow-md mx-4 md:mx-auto max-w-6xl my-12">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-                우리가 <span class="text-indigo-600">특별한</span> 이유
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Step 1 -->
-                <div class="text-center p-6 bg-indigo-50 rounded-xl shadow-sm">
-                    <div class="text-indigo-600 text-6xl font-extrabold mb-4">1</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800">심층 분석</h3>
-                    <p class="text-gray-600">고객사의 비즈니스 모델, 시장, 경쟁 환경을 철저히 분석하여 맞춤 전략을 수립합니다.</p>
+                <div id="aiSuggestionsOutput" class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200 text-gray-800 hidden">
+                    <h3 class="text-xl font-semibold mb-3">AI가 제안하는 서비스:</h3>
+                    <div id="suggestionsContent"></div>
                 </div>
-                <!-- Step 2 -->
-                <div class="text-center p-6 bg-purple-50 rounded-xl shadow-sm">
-                    <div class="text-purple-600 text-6xl font-extrabold mb-4">2</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800">혁신적 실행</h3>
-                    <p class="text-gray-600">최신 트렌드와 기술을 접목한 창의적이고 효과적인 마케팅 캠페인을 실행합니다.</p>
-                </div>
-                <!-- Step 3 -->
-                <div class="text-center p-6 bg-pink-50 rounded-xl shadow-sm">
-                    <div class="text-pink-600 text-6xl font-extrabold mb-4">3</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800">지속적인 성장</h3>
-                    <p class="text-gray-600">성과 모니터링 및 피드백을 통해 끊임없이 개선하고, 장기적인 성장을 지원합니다.</p>
+                 <div id="errorMessage" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded hidden" role="alert">
+                    오류가 발생했습니다. 잠시 후 다시 시도해주세요.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action / Contact Section -->
-    <section id="contact" class="section-padding bg-indigo-700 text-white text-center rounded-t-xl shadow-lg mt-12">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                지금 바로 당신의 비즈니스를 <br class="md:hidden">스텝업 할 준비가 되셨나요?
-            </h2>
-            <p class="text-lg md:text-xl mb-10 opacity-90 max-w-2xl mx-auto">
-                무료 상담을 통해 귀사에 최적화된 마케팅 전략을 만나보세요.
-            </p>
-            <form class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg text-left text-gray-800">
-                <div class="mb-5">
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">이름</label>
-                    <input type="text" id="name" name="name" placeholder="이름을 입력해주세요"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div class="mb-5">
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
-                    <input type="email" id="email" name="email" placeholder="이메일 주소를 입력해주세요"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div class="mb-5">
-                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">문의 내용</label>
-                    <textarea id="message" name="message" rows="5" placeholder="궁금한 점을 자세히 알려주세요."
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out shadow-md">
-                    문의하기
-                </button>
-            </form>
-            <div class="mt-10 text-lg opacity-90">
-                <p>전화: <a href="tel:02-1234-5678" class="underline hover:text-gray-200">02-1234-5678</a></p>
-                <p>이메일: <a href="mailto:contact@stepup.co.kr" class="underline hover:text-gray-200">contact@stepup.co.kr</a></p>
-            </div>
+    <!-- Final CTA Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20 text-center" id="contact">
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-loose tracking-wide animate-fade-in-up">
+            사장님의 고민, 저희는 수백 번 들어봤고 <br> 
+            수십 곳을 해결해왔습니다. <br class="md:hidden">
+            이번엔 당신 차례입니다.
+        </h2>
+        <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto opacity-90 animate-fade-in">
+            무료 상담 신청하고, 매장의 잠재력을 깨워보세요!
+        </p>
+        <a href="tel:010-1234-5678" class="inline-block bg-yellow-400 text-blue-800 font-bold text-xl px-10 py-5 rounded-full shadow-lg hover:bg-yellow-300 transform hover:scale-105 transition duration-300 animate-pulse">
+            📞 지금 바로 무료 상담하기 (010-1234-5678)
+        </a>
+        <div class="mt-8 text-gray-200 text-lg">
+            <p>카카오톡 채널: <a href="https://pf.kakao.com/_xxxxxx" target="_blank" class="underline hover:text-white">@프리랜서마케팅</a></p>
+            <p>이메일: <a href="mailto:your_email@example.com" class="underline hover:text-white">your_email@example.com</a></p>
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer class="bg-gray-800 text-white py-8 text-center">
-        <div class="container mx-auto px-4">
-            <p>&copy; 2025 스텝업 마케팅. All rights reserved.</p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="text-gray-400 hover:text-white">개인정보처리방침</a>
-                <a href="#" class="text-gray-400 hover:text-white">이용약관</a>
-            </div>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2025 [프리랜서 이름]. All rights reserved.</p>
+            <p class="mt-2">네이버 플레이스 마케팅 | 트렌드를 읽고 성과를 만듭니다.</p>
         </div>
     </footer>
 
-    <!-- Modal for LLM Response -->
-    <div id="responseModal" class="modal-overlay">
-        <div class="modal-content relative">
-            <button class="modal-close" id="closeModalBtn">&times;</button>
-            <h3 class="text-2xl font-bold text-gray-800 mb-4">✨ AI 맞춤형 서비스 제안 결과</h3>
-            <div id="modalContent" class="text-gray-700 prose max-w-none">
-                <!-- LLM response will be injected here -->
-            </div>
-            <div class="mt-6 text-center">
-                <p class="text-sm text-gray-500">더 자세한 내용은 문의하기를 통해 상담해주세요!</p>
-            </div>
-        </div>
-    </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const getSuggestionsBtn = document.getElementById('getSuggestionsBtn');
-            const businessDescriptionTextarea = document.getElementById('businessDescription');
-            const responseModal = document.getElementById('responseModal');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const modalContentDiv = document.getElementById('modalContent');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const buttonText = document.getElementById('buttonText');
-
-            // Function to show modal
-            const showModal = (content) => {
-                modalContentDiv.innerHTML = content;
-                responseModal.classList.add('show');
-            };
-
-            // Function to hide modal
-            const hideModal = () => {
-                responseModal.classList.remove('show');
-            };
-
-            // Event listener for closing modal
-            closeModalBtn.addEventListener('click', hideModal);
-            responseModal.addEventListener('click', (e) => {
-                if (e.target === responseModal) {
-                    hideModal();
-                }
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
+        });
 
-            getSuggestionsBtn.addEventListener('click', async () => {
-                const businessDescription = businessDescriptionTextarea.value.trim();
+        // FAQ Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const targetId = header.dataset.target;
+                const content = document.getElementById(targetId);
+                const icon = header.querySelector('.accordion-icon');
 
-                if (!businessDescription) {
-                    showModal('<p class="text-red-500">비즈니스 정보를 입력해주세요.</p>');
-                    return;
-                }
-
-                // Show loading spinner
-                buttonText.classList.add('hidden');
-                loadingSpinner.classList.remove('hidden');
-                getSuggestionsBtn.disabled = true; // Disable button during loading
-
-                let chatHistory = [];
-                const prompt = `사용자가 제공한 비즈니스 정보와 마케팅 과제를 바탕으로, "스텝업 마케팅"이 제공할 수 있는 가장 적합한 마케팅 서비스들을 구체적으로 제안해주세요. 제안은 다음 형식으로 구성해 주세요:
-                
-                ---
-                
-                **[비즈니스 분석]**
-                [사용자 입력 요약 및 분석]
-                
-                **[스텝업 마케팅 추천 서비스]**
-                
-                1.  **[서비스명 1]**: [해당 서비스가 사용자 비즈니스에 어떻게 도움이 될지에 대한 구체적인 설명]
-                2.  **[서비스명 2]**: [해당 서비스가 사용자 비즈니스에 어떻게 도움이 될지에 대한 구체적인 설명]
-                3.  **[서비스명 3]**: [해당 서비스가 사용자 비즈니스에 어떻게 도움이 될지에 대한 구체적인 설명]
-                (필요시 추가)
-                
-                **[기대 효과]**
-                [이러한 서비스들이 사용자 비즈니스에 가져올 수 있는 전반적인 기대 효과]
-                
-                ---
-                
-                사용자 비즈니스 정보: "${businessDescription}"
-                
-                `;
-
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                const payload = { contents: chatHistory };
-                const apiKey = ""; // API key will be provided by the runtime
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(`API error: ${response.status} ${response.statusText} - ${errorData.error?.message || 'Unknown error'}`);
+                // Close all other open accordions
+                document.querySelectorAll('.accordion-content.active').forEach(activeContent => {
+                    if (activeContent.id !== targetId) {
+                        activeContent.classList.remove('active');
+                        activeContent.style.maxHeight = null;
+                        activeContent.previousElementSibling.querySelector('.accordion-icon').classList.remove('rotate');
                     }
+                });
 
-                    const result = await response.json();
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        const text = result.candidates[0].content.parts[0].text;
-                        // Replace markdown bold with HTML bold, newlines with <br>
-                        let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                        formattedText = formattedText.replace(/\n/g, '<br>');
-                        showModal(formattedText);
-                    } else {
-                        showModal('<p class="text-red-500">죄송합니다. AI가 제안을 생성하는 데 실패했습니다. 다시 시도해 주세요.</p>');
-                    }
-                } catch (error) {
-                    console.error("Error calling Gemini API:", error);
-                    showModal(`<p class="text-red-500">오류가 발생했습니다: ${error.message}. 다시 시도해 주세요.</p>`);
-                } finally {
-                    // Hide loading spinner
-                    loadingSpinner.classList.add('hidden');
-                    buttonText.classList.remove('hidden');
-                    getSuggestionsBtn.disabled = false; // Re-enable button
+                // Toggle the clicked accordion
+                if (content.classList.contains('active')) {
+                    content.classList.remove('active');
+                    content.style.maxHeight = null;
+                    icon.classList.remove('rotate');
+                } else {
+                    content.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px"; // Set max-height to scrollHeight
+                    icon.classList.add('rotate');
                 }
             });
         });
-    </script>
 
+        // Simple animations on scroll (optional, can be more complex with Intersection Observer)
+        const animateOnScroll = (elements, classNamesString) => {
+            // Split the single string of class names into an array
+            const classesToAdd = classNamesString.split(' ').filter(Boolean); // Filter out empty strings in case of extra spaces
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Use the spread operator to add multiple classes from the array
+                        entry.target.classList.add(...classesToAdd);
+                        observer.unobserve(entry.target); // Stop observing after animation
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+            elements.forEach(el => {
+                observer.observe(el);
+            });
+        };
+
+        // Add hidden classes to elements initially for animation
+        document.querySelectorAll('.animate-fade-in-down').forEach(el => el.classList.add('opacity-0', 'transform', '-translate-y-4', 'transition-all', 'duration-1000', 'ease-out'));
+        document.querySelectorAll('.animate-fade-in').forEach(el => el.classList.add('opacity-0', 'transition-opacity', 'duration-1000', 'ease-in', 'delay-200'));
+        document.querySelectorAll('.animate-bounce-in').forEach(el => el.classList.add('opacity-0', 'transform', 'scale-50', 'transition-all', 'duration-1000', 'ease-out', 'delay-500'));
+        document.querySelectorAll('.animate-fade-in-up').forEach(el => el.classList.add('opacity-0', 'transform', 'translate-y-4', 'transition-all', 'duration-1000', 'ease-out'));
+        document.querySelectorAll('.animate-pulse').forEach(el => el.classList.add('opacity-0', 'transform', 'scale-95', 'transition-all', 'duration-1000', 'ease-out', 'delay-700'));
+
+
+        // Trigger animations
+        window.addEventListener('load', () => {
+            // Apply animations to sections or elements as they appear
+            animateOnScroll(document.querySelectorAll('.animate-fade-in-down'), 'opacity-100 translate-y-0');
+            animateOnScroll(document.querySelectorAll('.animate-fade-in'), 'opacity-100');
+            animateOnScroll(document.querySelectorAll('.animate-bounce-in'), 'opacity-100 scale-100');
+            animateOnScroll(document.querySelectorAll('.animate-fade-in-up'), 'opacity-100 translate-y-0');
+            animateOnScroll(document.querySelectorAll('.animate-pulse'), 'opacity-100 scale-100');
+            // For card animations
+            document.querySelectorAll('.transform.hover\\:scale-105').forEach(el => {
+                el.classList.add('opacity-0', 'transform', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
+            });
+            animateOnScroll(document.querySelectorAll('.transform.hover\\:scale-105'), 'opacity-100 translate-y-0');
+        });
+
+        // LLM Feature Functionality
+        const businessDescriptionInput = document.getElementById('businessDescription');
+        const getSuggestionsBtn = document.getElementById('getSuggestionsBtn');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const aiSuggestionsOutput = document.getElementById('aiSuggestionsOutput');
+        const suggestionsContent = document.getElementById('suggestionsContent');
+        const errorMessage = document.getElementById('errorMessage');
+
+        getSuggestionsBtn.addEventListener('click', async () => {
+            const prompt = businessDescriptionInput.value.trim();
+
+            if (!prompt) {
+                // Using alert for demonstration as per original structure, but a custom modal is recommended for production.
+                alert('비즈니스 정보를 입력해주세요.');
+                return;
+            }
+
+            // Show loading state
+            buttonText.textContent = '제안 생성 중...';
+            loadingSpinner.classList.remove('hidden');
+            getSuggestionsBtn.disabled = true;
+            aiSuggestionsOutput.classList.add('hidden'); // Hide previous results
+            errorMessage.classList.add('hidden'); // Hide previous errors
+
+            try {
+                let chatHistory = [];
+                const userPrompt = `다음 비즈니스 설명을 바탕으로, 네이버 플레이스 마케팅에 특화된 3가지 핵심 서비스 제안과 간략한 설명을 Markdown 리스트 형식으로 작성해주세요.
+                예시:
+                - **[서비스명1]**: 간략 설명
+                - **[서비스명2]**: 간략 설명
+                - **[서비스명3]**: 간략 설명
+                
+                비즈니스 설명: ${prompt}`;
+                
+                chatHistory.push({ role: "user", parts: [{ text: userPrompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    suggestionsContent.innerHTML = marked.parse(text); // Use marked.js for markdown rendering
+                    aiSuggestionsOutput.classList.remove('hidden');
+                } else {
+                    console.error('API 응답 구조가 예상과 다릅니다:', result);
+                    errorMessage.textContent = '죄송합니다. 서비스 제안을 가져오는데 실패했습니다. (응답 구조 오류)';
+                    errorMessage.classList.remove('hidden');
+                }
+
+            } catch (error) {
+                console.error('Error fetching AI suggestions:', error);
+                errorMessage.textContent = '서비스 제안을 가져오는 중 오류가 발생했습니다. 네트워크 연결을 확인하거나 나중에 다시 시도해주세요.';
+                errorMessage.classList.remove('hidden');
+            } finally {
+                // Hide loading state
+                buttonText.textContent = '✨ AI 서비스 제안 받기';
+                loadingSpinner.classList.add('hidden');
+                getSuggestionsBtn.disabled = false;
+            }
+        });
+
+        // Include marked.js for Markdown parsing (for AI suggestions output)
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+        script.onload = () => {
+            console.log('marked.js loaded');
+            // Ensure marked.js is available before attempting to parse markdown
+        };
+        document.head.appendChild(script);
+
+    </script>
 </body>
 </html>
