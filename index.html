@@ -93,7 +93,6 @@
 
     <!-- Hero Section -->
     <section class="relative bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-20 md:py-32 overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image:"></div>
         <div class="relative z-10 section-container text-center">
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-down">
                 당신의 가게는 분명 매력 있어요.<br class="md:hidden"><br> <span class="text-yellow-300">다만 아직 세상이 몰랐을 뿐입니다. </span>
@@ -405,7 +404,7 @@
                     <div id="suggestionsContent"></div>
                 </div>
                  <div id="errorMessage" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded hidden" role="alert">
-                    오류가 발생했습니다. 잠시 후 다시 시도해주세요.
+                    <!-- Error messages will be displayed here -->
                 </div>
             </div>
         </div>
@@ -533,9 +532,13 @@
         getSuggestionsBtn.addEventListener('click', async () => {
             const prompt = businessDescriptionInput.value.trim();
 
+            // Clear previous error messages
+            errorMessage.classList.add('hidden');
+            errorMessage.textContent = ''; // Clear text content
+
             if (!prompt) {
-                // Using alert for demonstration as per original structure, but a custom modal is recommended for production.
-                alert('비즈니스 정보를 입력해주세요.');
+                errorMessage.textContent = '비즈니스 정보를 입력해주세요.';
+                errorMessage.classList.remove('hidden');
                 return;
             }
 
@@ -544,7 +547,6 @@
             loadingSpinner.classList.remove('hidden');
             getSuggestionsBtn.disabled = true;
             aiSuggestionsOutput.classList.add('hidden'); // Hide previous results
-            errorMessage.classList.add('hidden'); // Hide previous errors
 
             try {
                 let chatHistory = [];
@@ -561,6 +563,8 @@
                 const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
+                console.log('Sending API request with payload:', payload); // Debugging: log payload
+
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -568,6 +572,7 @@
                 });
 
                 const result = await response.json();
+                console.log('API Response:', result); // Debugging: log full API response
                 
                 if (result.candidates && result.candidates.length > 0 &&
                     result.candidates[0].content && result.candidates[0].content.parts &&
